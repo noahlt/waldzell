@@ -1,0 +1,28 @@
+todo
+----
+
+- parse json into tree
+- render json
+
+- fetch json file
+- fetch json file in background
+
+- add ui for specifying json url
+- add ui go button
+- add ui refresh button
+- add auto-refresh
+
+
+polish
+------
+
+ - measure text for button size
+ - use typed event api
+ - disable TreeItem selection
+ - fix bug where text disappears
+
+
+later
+-----
+
+bundle os x app: http://www.eclipse.org/swt/macosx/
