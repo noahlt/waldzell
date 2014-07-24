@@ -1,0 +1,42 @@
+{
+    "item A": {
+        "item A1": {
+            "foo": "bar",
+            "x": 10,
+            "y": 10,
+            "hidden": true
+        },
+        "item A2": {
+            "foo": "baz",
+            "x": 20,
+            "y": 10,
+            "hidden": false
+        },
+        "item A3": {
+            "foo": "xot",
+            "x": 60,
+            "y": 25,
+            "hidden": false
+        }
+    },
+    "item B": {
+        "item B1": {
+            "enabled": true,
+            "name": "rodney",
+            "preferences": ["sex", "drugs", "rock 'n roll"],
+            "level": 1
+        },
+        "item B2": {
+            "enabled": true,
+            "name": "larson",
+            "preferences": ["film", "video games", "books"],
+            "level": 2
+        },
+        "item B1": {
+            "enabled": false,
+            "name": "eugene",
+            "preferences": ["food", "sleep", "exercise"],
+            "level": 3
+        }
+    }
+}

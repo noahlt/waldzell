@@ -22,7 +22,11 @@ polish
  - fix bug where text disappears
 
 
-later
------
+reference
+---------
+
+to find documentation on SWT, google for "swt snippets" and "swt javadoc"
+
+jackson-databind javadocs: http://fasterxml.github.io/jackson-databind/javadoc/2.3.0/
 
 bundle os x app: http://www.eclipse.org/swt/macosx/

@@ -5,6 +5,12 @@ import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.layout.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+
+import java.io.File;
+import java.io.IOException;
+
 enum CollapseState {
     COMPLETELY_COLLAPSED, CHILDREN_COLLAPSED, CHILDREN_EXPANDED, NO_EXPANDABLE_CHILDREN
 }
@@ -35,22 +41,8 @@ public class Editor {
 
         final int IMAGE_MARGIN = 2;
 
-        final Tree tree = new Tree(shell, 0);
-        for (int i=0; i<4; i++) {
-            TreeItem iItem = new TreeItem(tree, 0);
-            iItem.setText("TreeItem (0) - " + i);
-            iItem.setData(CollapseState.COMPLETELY_COLLAPSED);
-            for (int j=0; j<4; j++) {
-                TreeItem jItem = new TreeItem(iItem, 0);
-                jItem.setText("TreeItem (1) - " + j);
-                jItem.setData(CollapseState.COMPLETELY_COLLAPSED);
-                for (int k=0; k<4; k++) {
-                    TreeItem kItem = new TreeItem(jItem, 0);
-                    kItem.setText("TreeItem (2) - " + k);
-                    kItem.setData(CollapseState.COMPLETELY_COLLAPSED);
-                }
-            }
-        }
+        final Tree tree = generateBogusTree(shell);
+        final Tree jsonTree = generateTreeFromJson(shell);
 
         /*
          * NOTE: MeasureItem and PaintItem are called repeatedly.
@@ -215,6 +207,40 @@ public class Editor {
             // not a single child is expanded
             item.setData(CollapseState.CHILDREN_COLLAPSED);
         }
+    }
+
+    private static Tree generateBogusTree(Shell shell) {
+        final Tree tree = new Tree(shell, 0);
+        for (int i=0; i<4; i++) {
+            TreeItem iItem = new TreeItem(tree, 0);
+            iItem.setText("TreeItem (0) - " + i);
+            iItem.setData(CollapseState.COMPLETELY_COLLAPSED);
+            for (int j=0; j<4; j++) {
+                TreeItem jItem = new TreeItem(iItem, 0);
+                jItem.setText("TreeItem (1) - " + j);
+                jItem.setData(CollapseState.COMPLETELY_COLLAPSED);
+                for (int k=0; k<4; k++) {
+                    TreeItem kItem = new TreeItem(jItem, 0);
+                    kItem.setText("TreeItem (2) - " + k);
+                    kItem.setData(CollapseState.COMPLETELY_COLLAPSED);
+                }
+            }
+        }
+        return tree;
+    }
+
+    private static Tree generateTreeFromJson(Shell shell) {
+        final Tree tree = new Tree(shell, 0);
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            // TODO relative path?
+            JsonNode rootNode = mapper.readValue(new File("/Users/noah/waldzell/example.json"), JsonNode.class);
+            System.out.println(rootNode);
+            System.out.println(rootNode.fieldNames());
+        } catch (IOException e) {
+            System.out.println("some io exception :(");
+        }
+        return tree;
     }
 }
 
